@@ -42,14 +42,14 @@ export default function Home() {
         </div>
       </header>
       <div className='flex flex-col overflow-hidden bg-[#232829] px-[16px] pb-[30px] xl:rounded-b-[60px] xl:px-0 xl:pb-[150px]'>
-        <div className='mx-auto max-w-[1240px] pt-[20px] xl:pt-[50px]'>
+        <div className='mx-auto pt-[20px] lg:max-w-[760px] xl:max-w-[1240px] xl:pt-[50px]'>
           <h1 className='mb-[24px] text-[22px] leading-none font-bold tracking-[0.4px] text-white xl:mb-[110px] xl:text-[40px]'>
             Выбери подходящий для себя{' '}
             <span className='text-[#fdb056]'>тариф</span>
           </h1>
 
           <div className='relative flex flex-col xl:flex-row xl:gap-[88px]'>
-            <div className='relative mx-auto h-[200px] w-full xl:mx-0 xl:h-[767px] xl:w-[381px]'>
+            <div className='relative mx-auto h-[200px] w-full xl:mx-0 xl:mt-16 xl:h-[767px] xl:w-[381px]'>
               <Image
                 src={'/img/man.png'}
                 alt='Fitness hero'
