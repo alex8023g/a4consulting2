@@ -1,9 +1,18 @@
+import { CardsContainer } from '@/components/CardsContainer';
 import { CountdownTimer } from '@/components/CountdownTimer';
-import { HeroPricingCard } from '@/components/HeroPricingCard';
 import { PricingCard } from '@/components/PricingCard';
 import Image from 'next/image';
 
-const pricingCards = [
+export type PricingData = {
+  id: string;
+  period: string;
+  price: number;
+  full_price: number;
+  is_best: boolean;
+  text: string;
+};
+
+const pricingData: PricingData[] = [
   {
     id: 'f347d050-073c-4969-ae91-7346f935cf70',
     period: '1 неделя',
@@ -38,13 +47,21 @@ const pricingCards = [
   },
 ];
 
-const cards = pricingCards.filter((card) => !card.is_best).reverse();
-const heroCard = pricingCards.find((card) => card.is_best);
+const cardsData: PricingCard[] = pricingData.map((card) =>
+  card.is_best
+    ? {
+        ...card,
+        isSelected: true,
+      }
+    : {
+        ...card,
+        isSelected: false,
+      },
+);
 
 export default function Home() {
   return (
     <>
-      {/* Countdown Timer */}
       <header className='sticky top-0 z-10 bg-white'>
         <div className='flex w-full flex-col items-center gap-1 bg-[#1d5b43] py-2 xl:rounded-t-[60px]'>
           <span className='text-[14px] leading-[1.3] font-semibold text-white md:text-[24px]'>
@@ -72,13 +89,7 @@ export default function Home() {
             </div>
 
             <div className='flex flex-col gap-[14px] xl:mx-0'>
-              {heroCard && <HeroPricingCard {...heroCard} />}
-
-              <div className='flex flex-col gap-[14px] lg:flex-row'>
-                {cards.map((card) => (
-                  <PricingCard key={card.id} {...card} />
-                ))}
-              </div>
+              <CardsContainer cardsDataProp={cardsData} />
 
               <div className='mt-0 flex gap-2 rounded-[20px] bg-[#2d3233] py-[14px] pr-[20px] pl-[12px] md:px-[20px] md:py-[18px] lg:w-[500px] xl:mt-5'>
                 <div className='h-[26px] w-[24px] shrink-0'>
