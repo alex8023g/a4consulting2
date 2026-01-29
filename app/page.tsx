@@ -2,6 +2,7 @@ import { CardsContainer } from '@/components/CardsContainer';
 import { CountdownTimer } from '@/components/CountdownTimer';
 import { PricingCard } from '@/components/PricingCard';
 import Image from 'next/image';
+import { TimerProvider } from '@/components/ClientProvider';
 
 export type PricingData = {
   id: string;
@@ -61,7 +62,7 @@ const cardsData: PricingCard[] = pricingData.map((card) =>
 
 export default function Home() {
   return (
-    <>
+    <TimerProvider>
       <header className='sticky top-0 z-10 bg-white'>
         <div className='flex w-full flex-col items-center gap-1 bg-[#1d5b43] py-2 xl:rounded-t-[60px]'>
           <span className='text-[14px] leading-[1.3] font-semibold text-white md:text-[24px]'>
@@ -159,6 +160,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </>
+    </TimerProvider>
   );
 }

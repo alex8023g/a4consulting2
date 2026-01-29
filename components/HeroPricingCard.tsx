@@ -1,6 +1,8 @@
 import { getDiscount } from '@/lib/discount';
 import { PricingCard } from './PricingCard';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
+import { TimerContext } from './ClientProvider';
+import { twJoin } from 'tailwind-merge';
 
 export function HeroPricingCard({
   card,
@@ -9,6 +11,8 @@ export function HeroPricingCard({
   card: PricingCard;
   setCardsData: Dispatch<SetStateAction<PricingCard[]>>;
 }) {
+  const ctx = useContext(TimerContext);
+  const time = ctx?.time;
   return (
     <div
       className={`relative block w-full rounded-[20px] border-2 bg-[#313637] px-[20px] py-[20px] md:h-[190px] md:rounded-[34px] md:pt-[30px] md:pb-[26px] md:pl-5 xl:flex xl:flex-col xl:items-end xl:justify-center xl:gap-4 ${
@@ -39,14 +43,27 @@ export function HeroPricingCard({
             {card.period}
           </span>
           <div className='flex flex-col items-end'>
-            <span
-              className={`text-[30px] leading-none font-semibold md:text-[50px] ${
-                card.isSelected ? 'text-[#fdb056]' : 'text-white'
-              }`}
+            {
+              <span
+                className={twJoin(
+                  `text-[30px] leading-none font-semibold transition-opacity duration-500 md:text-[50px]`,
+                  card.isSelected ? 'text-[#fdb056]' : 'text-white',
+                  time && time === 1 ? 'opacity-0' : 'opacity-100',
+                )}
+              >
+                {time ? (
+                  <span>{card.price}&nbsp;₽</span>
+                ) : (
+                  <span>{card.full_price}&nbsp;₽</span>
+                )}
+              </span>
+            }
+            <div
+              className={twJoin(
+                'relative inline-grid transition-opacity duration-500',
+                time && time > 1 ? 'opacity-100' : 'opacity-0',
+              )}
             >
-              {card.price}&nbsp;₽
-            </span>
-            <div className='relative inline-grid'>
               <span className='text-[14px] leading-[1.2] font-normal text-[#919191] md:text-[24px]'>
                 {card.full_price} ₽
               </span>
