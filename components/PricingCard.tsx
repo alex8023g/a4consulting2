@@ -5,8 +5,8 @@ export interface PricingCardProps {
   price: number;
   full_price: number;
   text: string;
-  isHighlighted?: boolean;
-  isHit?: boolean;
+  isSelected?: boolean;
+  // is_best?: boolean;
 }
 
 export function PricingCard({
@@ -14,13 +14,13 @@ export function PricingCard({
   price,
   full_price,
   text,
-  isHighlighted = false,
-  isHit = false,
+  isSelected = false,
+  // is_best = false,
 }: PricingCardProps) {
   return (
     <div
       className={`relative block w-full rounded-[20px] border-2 border-[#fdb056] bg-[#313637] px-[20px] py-[20px] lg:flex lg:flex-col lg:items-center lg:justify-around lg:gap-10 lg:rounded-[40px] lg:px-5 lg:py-[20px] lg:pt-[70px] lg:pr-[16px] lg:pb-6 lg:pl-[20px] ${
-        isHighlighted ? 'border-[#fdb056]' : 'border-[#484d4e]'
+        isSelected ? 'border-[#fdb056]' : 'border-[#484d4e]'
       }`}
     >
       <div className='absolute top-0 right-[8%] flex items-center justify-center rounded-b-lg bg-[#fd5656] px-2 py-[5px] lg:right-auto lg:left-[49px]'>
@@ -39,7 +39,7 @@ export function PricingCard({
             <div className='flex flex-col items-end'>
               <span
                 className={`text-[30px] leading-none font-semibold md:text-[50px] ${
-                  isHighlighted ? 'text-[#fdb056]' : 'text-white'
+                  isSelected ? 'text-[#fdb056]' : 'text-white'
                 }`}
               >
                 {price}&nbsp;₽

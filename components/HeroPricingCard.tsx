@@ -6,11 +6,11 @@ export function HeroPricingCard({
   price,
   full_price,
   text,
-  isHighlighted = false,
-  isHit = false,
+  isSelected = false,
+  // is_best = false,
 }: PricingCardProps) {
   return (
-    <div className='relative block w-full rounded-[20px] border-2 border-[#fdb056] bg-[#313637] px-[20px] py-[20px] md:h-[190px] md:w-[748px] md:rounded-[34px] md:pt-[30px] md:pb-[26px] md:pl-5 lg:w-full xl:flex xl:flex-col xl:items-end xl:justify-center xl:gap-4'>
+    <div className='/md:w-[748px] /lg:w-full relative block w-full rounded-[20px] border-2 border-[#fdb056] bg-[#313637] px-[20px] py-[20px] md:h-[190px] md:rounded-[34px] md:pt-[30px] md:pb-[26px] md:pl-5 xl:flex xl:flex-col xl:items-end xl:justify-center xl:gap-4'>
       <div className='absolute top-0 right-[18%] flex items-center justify-center overflow-hidden rounded-b-lg bg-[#fd5656] px-2 py-[5px] xl:right-auto xl:left-[50px]'>
         <span className='text-[13px] leading-[1.3] font-medium text-white md:text-[22px]'>
           -{getDiscount(price, full_price)}%
