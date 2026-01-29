@@ -1,6 +1,6 @@
 import { getDiscount } from '@/lib/discount';
 import { Dispatch, SetStateAction, useContext } from 'react';
-import { TimerContext } from './ClientProvider';
+import { DataContext } from './ClientProvider';
 import { twJoin } from 'tailwind-merge';
 
 export interface PricingCard {
@@ -20,7 +20,7 @@ export function PricingCard({
   card: PricingCard;
   setCardsData: Dispatch<SetStateAction<PricingCard[]>>;
 }) {
-  const ctx = useContext(TimerContext);
+  const ctx = useContext(DataContext);
   const time = ctx?.time;
   return (
     <div

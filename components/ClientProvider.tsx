@@ -2,18 +2,33 @@
 
 import { createContext, Dispatch, SetStateAction, useState } from 'react';
 
-export type TimerContextType = {
+export type DataContextType = {
   time: number;
   setTime: Dispatch<SetStateAction<number>>;
+  isAgreementChecked: boolean;
+  setIsAgreementChecked: Dispatch<SetStateAction<boolean>>;
+  isBuyBtnClicked: boolean;
+  setIsBuyBtnClicked: Dispatch<SetStateAction<boolean>>;
 };
 
-export const TimerContext = createContext<TimerContextType | null>(null);
+export const DataContext = createContext<DataContextType | null>(null);
 
-export function TimerProvider({ children }: { children: React.ReactNode }) {
+export function DataProvider({ children }: { children: React.ReactNode }) {
   const [time, setTime] = useState(120);
+  const [isAgreementChecked, setIsAgreementChecked] = useState(false);
+  const [isBuyBtnClicked, setIsBuyBtnClicked] = useState(false);
   return (
-    <TimerContext.Provider value={{ time, setTime }}>
+    <DataContext.Provider
+      value={{
+        time,
+        setTime,
+        isAgreementChecked,
+        setIsAgreementChecked,
+        isBuyBtnClicked,
+        setIsBuyBtnClicked,
+      }}
+    >
       {children}
-    </TimerContext.Provider>
+    </DataContext.Provider>
   );
 }

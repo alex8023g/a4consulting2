@@ -1,12 +1,12 @@
 'use client';
 import Image from 'next/image';
 import { useContext, useEffect } from 'react';
-import { TimerContext } from './ClientProvider';
+import { DataContext } from './ClientProvider';
 
 const imgStar = '/img/star.png';
 
 export function CountdownTimer() {
-  const ctx = useContext(TimerContext);
+  const ctx = useContext(DataContext);
 
   useEffect(() => {
     if (!ctx) return;
