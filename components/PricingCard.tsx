@@ -1,4 +1,6 @@
-interface PricingCardProps {
+import { getDiscount } from '@/lib/discount';
+
+export interface PricingCardProps {
   period: string;
   price: number;
   full_price: number;
@@ -15,56 +17,45 @@ export function PricingCard({
   isHighlighted = false,
   isHit = false,
 }: PricingCardProps) {
-  const discount = Math.round((1 - price / full_price) * 100);
   return (
     <div
-      className={`relative flex flex-col items-center rounded-[40px] border-2 bg-[#313637] px-5 pt-[70px] pb-6 ${
+      className={`relative block w-full rounded-[20px] border-2 border-[#fdb056] bg-[#313637] px-[20px] py-[20px] lg:flex lg:flex-col lg:items-center lg:justify-around lg:gap-10 lg:rounded-[40px] lg:px-5 lg:py-[20px] lg:pt-[70px] lg:pr-[16px] lg:pb-6 lg:pl-[20px] ${
         isHighlighted ? 'border-[#fdb056]' : 'border-[#484d4e]'
       }`}
     >
-      {/* Discount badge */}
-      <div className='absolute top-0 left-[49px] flex items-center justify-center rounded-b-lg bg-[#fd5656] px-2 py-[5px]'>
-        <span className='font-montserrat text-[22px] leading-[1.3] font-medium text-white'>
-          -{discount}%
+      <div className='absolute top-0 right-[8%] flex items-center justify-center rounded-b-lg bg-[#fd5656] px-2 py-[5px] lg:right-auto lg:left-[49px]'>
+        <span className='font-montserrat text-[14px] leading-[1.3] font-medium text-white md:text-[22px]'>
+          -{getDiscount(price, full_price)}%
         </span>
       </div>
 
-      {/* Hit label */}
-      {isHit && (
-        <span className='absolute top-[10px] right-[20px] text-[22px] leading-[1.3] font-medium tracking-[0.66px] text-[#fdb056]'>
-          хит!
-        </span>
-      )}
-
-      {/* Content */}
-      <div className='flex flex-col items-center gap-10'>
-        <div className='flex flex-col items-center gap-[30px]'>
-          {/* Duration */}
-          <span className='text-[26px] leading-[1.2] font-medium text-white'>
-            {period}
-          </span>
-
-          {/* Price */}
-          <div className='flex flex-col items-end'>
-            <span
-              className={`text-[50px] leading-none font-semibold ${
-                isHighlighted ? 'text-[#fdb056]' : 'text-white'
-              }`}
-            >
-              {price}
+      <div className='flex items-center justify-around gap-10 lg:block'>
+        <div className='item-start flex w-1/2 flex-col gap-10 lg:w-auto lg:items-center'>
+          <div className='flex flex-col items-start gap-[12px] md:gap-[30px] lg:items-center'>
+            <span className='text-[16px] leading-[1.2] font-medium text-white md:text-[26px]'>
+              {period}
             </span>
-            <div className='relative inline-grid'>
-              <span className='text-[24px] leading-[1.2] font-normal text-[#919191]'>
-                {full_price}
+
+            <div className='flex flex-col items-end'>
+              <span
+                className={`text-[30px] leading-none font-semibold md:text-[50px] ${
+                  isHighlighted ? 'text-[#fdb056]' : 'text-white'
+                }`}
+              >
+                {price}&nbsp;₽
               </span>
-              <div className='absolute top-[15px] left-0 h-[2px] w-full bg-[#919191]'></div>
+              <div className='relative inline-grid'>
+                <span className='text-[14px] leading-[1.2] font-normal text-[#919191] md:text-[24px]'>
+                  {full_price}&nbsp;₽
+                </span>
+                <div className='absolute top-[50%] left-0 h-[2px] w-full bg-[#919191]'></div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Description */}
-        <div className='flex items-start justify-center py-2.5'>
-          <p className='w-[204px] text-[16px] leading-[1.3] font-normal text-white'>
+        <div className='flex w-1/2 items-start justify-start py-2.5 lg:w-auto lg:justify-center'>
+          <p className='text-[13px] leading-[1.3] font-normal text-white md:w-[204px] md:text-[16px]'>
             {text}
           </p>
         </div>
